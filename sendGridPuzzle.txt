@@ -1,0 +1,120 @@
+import java.util.Scanner;
+//Antonio Ruballos
+//aruballo@uci.edu
+//Solution to SendGrid Trivia Puzzle
+
+public class sendGridPuzzleSolution {
+
+	public static void main(String[] args) {
+		int x = 0;
+		int y = 0;
+		int iterations = 0;
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please indicate the required quartz for the soup: (Integers only for all inputs, please!)");
+		int requiredQuartz = scanner.nextInt();
+		System.out.println("Please indicate the quartz of the first pot: ");
+		int maxX = scanner.nextInt();
+		System.out.println("Please indicate the quartz of the second pot: ");
+		int maxY = scanner.nextInt();
+		
+		//If we do not have a pot larger than the required quartz, we can't move on.
+		//I say larger, because if both are less than the required amount, then
+		//obviously we can't hold the amount needed and if we have one the exact size
+		//there's no reason to move on. 
+		if((!(maxX>requiredQuartz) && !(maxY>requiredQuartz)) || ((maxX == requiredQuartz) || (maxY == requiredQuartz)) ){
+			System.out.println("Error: Either both pots are too small or you have a pot of the size needed already.");
+			System.out.println("Please rerun program with correct inputs.");
+			System.exit(0);
+		}
+		
+		
+		//After working out arbitrary numbers of the given problem, I found that
+		//my solution for the 4 5 3 numbers works for any given numbers so long as
+		//the difference between the bigger pot and the smaller pot is a multiple 
+		//of the required quarts. Dividing the required quartz by the multiple then
+		//gave me the number of iterations of my algorithm that I have to go through.
+		//If the pots are equal, there is no way to use one as a reference of measurement
+		//for the other, so there is an error. If the larger pot minus the smaller pot 
+		//is equal to the required quartz, then there is also no reason to run the 
+		//algorithm. 
+		
+		if(maxX > maxY){
+			if((maxX - maxY) == requiredQuartz){
+				System.out.println("You can subtract the smaller pot from the larger pot to get your required quartz.");
+				System.exit(0);
+			}
+			
+			if(requiredQuartz%(maxX - maxY) == 0){
+				iterations = requiredQuartz / (maxX - maxY);
+			}
+			else{
+				//Is there another solution to this riddle? If not exit with error.
+			}
+		}
+		else if(maxX < maxY){
+			if((maxY - maxX) == requiredQuartz){
+				System.out.println("You can subtract the smaller pot from the larger pot to get your required quartz.");
+				System.exit(0);
+			}
+			if(requiredQuartz%(maxX - maxY) == 0){
+				iterations = requiredQuartz / (maxY - maxX);
+			}
+			else{
+				//Is there another solution to this riddle? If not, exit with error.
+			}
+		}
+		else{
+			System.out.println("Your pots are equal in size. I do not believe there is a way to solve your dilemma.");
+			System.exit(0);
+		}
+		
+		for(int i = 0; i < iterations; i++){
+			if(maxX > maxY){
+				
+				System.out.println("We fill the larger pot with : ");
+				x = maxX;
+				System.out.println(x + " quartz.");
+				System.out.println("We begin to top off the smaller pot by pouring some of the big pot. We have : ");
+				x = maxX - (maxY - y);
+				System.out.println(x + " quartz remaining in the big pot.");
+				
+				if(x == requiredQuartz){
+					System.out.println("This is the required amount of quartz we needed.");
+					System.out.println("Enjoy the soup!");
+					break;
+				}
+				System.out.println("We empy out the full small pot.");
+				System.out.println("We empty out the bigger pot into the smaller pot.");
+				System.out.println("The smaller pot has : ");
+				y = x;
+				System.out.println(y + " quartz.");
+			}
+			
+			else if(maxX < maxY){
+				
+				System.out.println("We fill the larger pot with : ");
+				y = maxY;
+				System.out.println(y + " quartz.");
+				System.out.println("We begin to top off the smaller pot by pouring some of the big pot. We have : ");
+				y = maxY - (maxX - x);
+				System.out.println(y + " quartz remaining in the big pot.");
+				
+				if(y == requiredQuartz){
+					System.out.println("This is the required amount of quartz we needed.");
+					System.out.println("Enjoy the soup!");
+					break;
+				}
+				System.out.println("We dump out the water in the smaller pot.");
+				System.out.println("We empty out the bigger pot into the smaller pot.");
+				System.out.println("The smaller pot has : ");
+				x = y;
+				System.out.println(x + " quartz.");
+			}
+		}
+		
+		
+		
+	}
+
+}

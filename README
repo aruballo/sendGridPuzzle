@@ -1,1 +1,8 @@
 My executable for the SendGrid solution.
+The exectuble is in sendGrid->Debug->sendGrid.exe.
+I included all the project files in case they were neccessary to run 
+the executable, but I believe all that is needed is to have
+C++ installed on your computer.
+
+Thanks,
+Antonio
