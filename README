@@ -2,7 +2,9 @@ My executable for the SendGrid solution.
 The exectuble is in sendGrid->Debug->sendGrid.exe.
 I included all the project files in case they were neccessary to run 
 the executable, but I believe all that is needed is to have
-C++ installed on your computer.
+C++ installed on your computer. The Java source code and 
+C++ source code are also included. They are the two text
+files in the main directory of this repo.
 
 Thanks,
 Antonio
